@@ -1,0 +1,18 @@
+{
+    "weight": "/home/atharvahude/Desktop/yolov8-explainer/YOLOv8_Explainer_old/images/Ships-Experiment-5-Folds-Models-Dataset/models/train4/weights/best.pt",
+    "device": "cuda:0",
+    "method": "GradCAMPlusPlus",
+    "layer": [
+        "C2f"
+    ],
+    "layer_indices": [
+        21
+    ],
+    "backward_type": "all",
+    "conf_threshold": 0.2,
+    "ratio": 0.02,
+    "show_result": true,
+    "renormalize": true,
+    "task": "obb",
+    "img_size": 1280
+}
