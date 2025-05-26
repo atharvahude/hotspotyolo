@@ -30,14 +30,17 @@ Adjust these parameters as needed for your specific use case and model.
 
 
 ## Installation
-To install the package, clone the repository and run the following command:
+You can install the latest release directly from PyPI:
+```
+pip install hotspotyolo
+```
 
+To install the package, clone the repository and run the following command:
 ```
 pip install -e .
 ```
 
 If you already have requirements.txt then do this most of you will have it. 
-
 ```
 pip install . --no-deps
 ```

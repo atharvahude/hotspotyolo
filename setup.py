@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='hotspotyolo',
-    version='0.1.0',
+    version='0.1.1',
     author='Atharva Hude',
     author_email='ahude@asu.edu',
     description='A package for generating CAMs using the YOLOv8 - v11 models.',
