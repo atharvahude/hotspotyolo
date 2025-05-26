@@ -1,6 +1,6 @@
 [project]
 name = "hotspotyolo"
-version = "0.1.0"
+version = "0.1.1"
 description = "Generate CAMs of Yolo Models"
 authors = [{name = "Atharva Hude", email = "ahude@asu.edu"}]
 readme = "README.md"
