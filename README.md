@@ -62,7 +62,7 @@ params = {
     'show_result': True, 
     'renormalize': True, 
     'task':'obb', 
-    'img_size':1280, 
+    'img_size':640, 
     'save_metadata': True, 
 }
 
@@ -70,15 +70,26 @@ model = yolo_heatmap(**params)
 model(image_path, output_folder)
 ```
 
-## Testing
-To run the tests, navigate to the `tests` directory and execute:
+## Results 
 
-```
-pytest
-```
+### OBB CAM
+![OBB CAM Example](results/obb/result.png)
+
+### Detection CAM
+![Detection CAM Example](results/detect/result.png)
+
+### Segmentation CAM
+![Segmentation CAM Example](results/seg/result.png)
+
+### Classification CAM
+![Classification CAM Example](results/classify/result.png)
+
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue for any enhancements or bug fixes.
+
+## Important
+Right now the pose model is not working.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
