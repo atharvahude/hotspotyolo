@@ -1,0 +1,18 @@
+{
+    "weight": "examples/yolov8x-seg.pt",
+    "device": "cuda:0",
+    "method": "GradCAMPlusPlus",
+    "layer": [
+        "C2f"
+    ],
+    "layer_indices": [
+        21
+    ],
+    "backward_type": "all",
+    "conf_threshold": 0.2,
+    "ratio": 0.02,
+    "show_result": true,
+    "renormalize": true,
+    "task": "segment",
+    "img_size": 640
+}

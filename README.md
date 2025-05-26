@@ -18,7 +18,7 @@ The `params` dictionary configures how the heatmap is generated and visualized. 
   - `obb`: `<box, angle, all>`
   - `classify`: `<all>`
 - **conf_threshold** (`float`): Confidence threshold for detections (e.g., `0.2`).
-- **ratio** (`float`): Ratio for filtering small objects (recommended range: `0.02`–`0.1`).
+- **ratio** (`float`): Ratio that decides how many detections we should consider in forward pass. (recommended range: `0.02`–`0.1`).
 - **show_result** (`bool`): If `True`, displays the result with heatmaps overlaid. Set to `False` to skip visualization.
 - **renormalize** (`bool`): If `True`, renormalizes the heatmap for better visualization.
 - **task** (`str`): Task type. Supported values: `"detect"`, `"segment"`, `"pose"`, `"obb"`, `"classify"`.
@@ -56,14 +56,14 @@ params = {
     'device': 'cuda:0',
     'method': 'GradCAMPlusPlus', 
     'layer': [21],
-    'backward_type': 'all', # detect:<class, box, all> segment:<class, box, segment, all> pose:<box, keypoint, all> obb:<box, angle, all> classify:<all>
-    'conf_threshold': 0.2, # 0.2
-    'ratio': 0.02, # 0.02-0.1
-    'show_result': True, # Set to False if you do not need to draw results
+    'backward_type': 'all',
+    'conf_threshold': 0.2, 
+    'ratio': 0.02, 
+    'show_result': True, 
     'renormalize': True, 
-    'task':'obb', # Task (detect, segment, pose, obb, classify)
-    'img_size':1280, # Image size
-    'save_metadata': True, # Save metadata in the output folder
+    'task':'obb', 
+    'img_size':1280, 
+    'save_metadata': True, 
 }
 
 model = yolo_heatmap(**params)

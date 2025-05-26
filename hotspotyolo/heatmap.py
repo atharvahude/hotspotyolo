@@ -75,6 +75,27 @@ class yolo_heatmap:
         eigencam_image_renormalized = show_cam_on_image(image_float_np, renormalized_cam, use_rgb=True)
         return eigencam_image_renormalized
     
+
+    def renormalize_cam_in_bounding_boxes_obb(self, boxes, image_float_np, grayscale_cam):
+        """Normalize the CAM to be in the range [0, 1] 
+        inside every oriented bounding box (OBB), and zero outside of the bounding boxes."""
+        renormalized_cam = np.zeros(grayscale_cam.shape, dtype=np.float32)
+        for box in boxes:
+            # box: [x1, y1, x2, y2, x3, y3, x4, y4]
+            pts = np.array(box, dtype=np.int32).reshape((4, 2))
+            # Create mask for the polygon
+            mask = np.zeros_like(grayscale_cam, dtype=np.uint8)
+            cv2.fillPoly(mask, [pts], 1)
+            # Extract the region inside the polygon
+            region = grayscale_cam * mask
+            # Normalize only inside the polygon
+            region_norm = scale_cam_image(region)
+            # Apply the normalized region back to the mask
+            renormalized_cam[mask == 1] = region_norm[mask == 1]
+        renormalized_cam = scale_cam_image(renormalized_cam)
+        eigencam_image_renormalized = show_cam_on_image(image_float_np, renormalized_cam, use_rgb=True)
+        return eigencam_image_renormalized
+    
     def process(self, img_path, save_path):
         # img process
         try:
@@ -100,6 +121,8 @@ class yolo_heatmap:
         pred = self.model_yolo.predict(tensor, conf=self.conf_threshold)[0]
         if self.renormalize and self.task in ['detect', 'segment', 'pose']:
             cam_image = self.renormalize_cam_in_bounding_boxes(pred.boxes.xyxy.cpu().detach().numpy().astype(np.int32), img, grayscale_cam)
+        if self.renormalize and self.task == 'obb':
+            cam_image = self.renormalize_cam_in_bounding_boxes_obb(pred.obb.xyxyxyxy.cpu().detach().numpy().astype(np.int32), img, grayscale_cam)
         if self.show_result:
             cam_image = pred.plot(img=cam_image,
                                   conf=True, # Display confidence
